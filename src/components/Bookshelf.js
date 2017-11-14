@@ -13,6 +13,8 @@ class Bookshelf extends Component {
             wantToRead: [],
             read: []
         };
+
+        this.reloadBooks = this.refreshBookList.bind(this);
     }
 
 
@@ -56,25 +58,28 @@ class Bookshelf extends Component {
                 <div className="list-books-content">
                     <div>
                         <Shelf
-                        books = {this.state.currentlyReading}
-                        shelfName = "Currently Reading"
+                            books = {this.state.currentlyReading}
+                            shelfName = "Currently Reading"
+                            reloadBooks = {this.reloadBooks}
                         />
                         <Shelf
                             books = {this.state.wantToRead}
                             shelfName = "Want To Read"
+                            reloadBooks = {this.reloadBooks}
                         />
                         <Shelf
                             books = {this.state.read}
                             shelfName = "Read"
+                            reloadBooks = {this.reloadBooks}
                         />
                     </div>
                 </div>
 
                 <Link
-                to="/search"
-                className="open-search"
+                    to="/search"
+                    className="open-search"
                 >Find a book</Link>
-                </div>
+            </div>
         )
     }
 }
