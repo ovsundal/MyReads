@@ -18,10 +18,7 @@ class Bookshelf extends Component {
     }
 
 
-    changeShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf);
-        this.refreshBookList();
-    };
+
 
     //on initial load, add all books from API and filter them to their respective shelf
     componentDidMount() {
