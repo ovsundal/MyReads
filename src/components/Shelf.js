@@ -8,7 +8,7 @@ class Shelf extends Component {
         super(props);
     }
 
-    changeShelf = (book, shelf) => (BooksAPI.update(book, shelf));
+    // changeShelf = (book, shelf) => (BooksAPI.update(book, shelf));
 
     render() {
         return(
@@ -17,10 +17,11 @@ class Shelf extends Component {
                 <div className="bookshelf-books">
                     <ol className="books-grid">
                         {this.props.books.map((item) =>
+                            // how would i uniquely identify each book with a "key" prop?
                             <Book
                                 book = {item}
                             />
-                        )})
+                        )}
                     </ol>
                 </div>
             </div>

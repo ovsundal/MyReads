@@ -10,9 +10,7 @@ class Book extends Component {
 
     changeShelf = (book, shelf) => {
         BooksAPI.update(book, shelf);
-        this.refreshBookList();
     };
-
 
     render() {
         return(
@@ -24,6 +22,7 @@ class Book extends Component {
                         <div className="book-shelf-changer">
                             <select value={this.book.shelf} onChange={(event) => {
                                 this.changeShelf(this.book, event.target.value);
+                                // why can i not call this method when recieved as props?
                                 this.props.reloadBooks();
                             }}>
                                 <option value="none" disabled>Move to...</option>
@@ -43,15 +42,6 @@ class Book extends Component {
 
         )
     }
-
-
-
-
-
-
-
-
 }
-
 
 export default Book;

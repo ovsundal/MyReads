@@ -17,9 +17,6 @@ class Bookshelf extends Component {
         this.reloadBooks = this.refreshBookList.bind(this);
     }
 
-
-
-
     //on initial load, add all books from API and filter them to their respective shelf
     componentDidMount() {
         this.refreshBookList();
@@ -72,6 +69,7 @@ class Bookshelf extends Component {
                     </div>
                 </div>
 
+                {/*QUESTION i can't get the button to appear? What am i doing wrong?*/}
                 <Link
                     to="/search"
                     className="open-search"
