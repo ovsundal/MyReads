@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as BooksAPI from '../BooksAPI';
 import {Link} from 'react-router-dom';
 import { Debounce } from 'react-throttle';
+import Book from "./Book";
 
 /**
  * Component for book searching input field
@@ -19,9 +20,9 @@ class SearchBar extends Component {
             this.setState({ books }))
     }
 
-    changeShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf);
-    };
+    // changeShelf = (book, shelf) => {
+    //     BooksAPI.update(book, shelf);
+    // };
 
 
     updateQuery = (query) => {
@@ -72,31 +73,17 @@ class SearchBar extends Component {
                                 placeholder="Search by title or author"
                                 value={this.state.query}
                                 onChange={(event) => this.updateQuery(event.target.value)}
-                            />'
+                            />
                         </Debounce>
                     </div>
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {showingBooks.map((book) => (
-                        <li key={book.id}>
-                            <div className="book">
-                                <div className="book-top">
-                                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${book.imageLinks.smallThumbnail}` }}>
-                                        <div className="book-shelf-changer">
-                                            <select value={book.shelf} onChange={(event) => this.changeShelf(book, event.target.value)}>
-                                                <option value="none" disabled>Move to...</option>
-                                                <option value="currentlyReading">Currently Reading</option>
-                                                <option value="wantToRead">Want to Read</option>
-                                                <option value="read">Read</option>
-                                                <option value="none">None</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="book-title">{`${book.title}`}</div>
-                                <div className="book-authors">{`${book.authors}`}</div>
-                            </div>
+                        {showingBooks.map((item) => (
+                        <li key={item.id}>
+                            <Book
+                                book = {item}
+                            />
                         </li>
                         ))}
                     </ol>

@@ -16,11 +16,14 @@ class Shelf extends Component {
                 <h2 className="bookshelf-title">{this.props.shelfName}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
+
                         {this.props.books.map((item) =>
                             // how would i uniquely identify each book with a "key" prop?
-                            <Book
-                                book = {item}
-                            />
+                            <li key={item.id}>
+                                <Book
+                                    book = {item}
+                                />
+                            </li>
                         )}
                     </ol>
                 </div>
