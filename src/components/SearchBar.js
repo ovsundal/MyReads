@@ -33,17 +33,18 @@ class SearchBar extends Component {
             BooksAPI.search(query, 20).then((books) => {
                 //only change state if books are actually found
                 if(books.length > 0) {
-                    //QUESTION
 
-                    //this will work (but not add already existing books)
+                    const booksInShelf = this.state.books;
+
+                    //if queried book exists in shelf, replace queried book with shelf book
+                    for(let i = 0; i < books.length; i++) {
+                        let index = booksInShelf.indexOf(books[i]);
+
+                        if(index) {
+                            books[i] = booksInShelf[index];
+                        }
+                    }
                     this.setState({books})
-
-                    //but this will not, why?
-                    // this.setState((previousBooks) => ({
-                    //     books: previousBooks + newBooks
-                    // }));
-
-                    //i got a required change here for my last review, but i'm not sure i understand what needs to be changed?
                 }
             })
         } else {
@@ -67,6 +68,7 @@ class SearchBar extends Component {
                     >Close</Link>
                     <div className="search-books-input-wrapper">
                         {/*prevent too many api calls using Debounce*/}
+                        {/*QUESTION! I can't type anything into the textbox if debounce is active. Why is it not working?*/}
                         <Debounce time="400" handler="onChange">
                             <input
                                 type="text"
