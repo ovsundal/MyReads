@@ -27,10 +27,11 @@ class SearchBar extends Component {
 
     updateQuery = (query) => {
         this.setState({query});
-
+        console.log(query);
         //if user updates query, do a search with query and max returned results.
         if(query) {
             BooksAPI.search(query, 20).then((books) => {
+                console.log(books);
                 //only change state if books are actually found
                 if(books.length > 0) {
 
@@ -61,19 +62,17 @@ class SearchBar extends Component {
 
             <div className="search-books">
                 <div className="search-books-bar">
-
                     <Link
                         to="/"
                         className="close-search"
                     >Close</Link>
                     <div className="search-books-input-wrapper">
                         {/*prevent too many api calls using Debounce*/}
-                        {/*QUESTION! I can't type anything into the textbox if debounce is active. Why is it not working?*/}
                         <Debounce time="400" handler="onChange">
                             <input
                                 type="text"
                                 placeholder="Search by title or author"
-                                value={this.state.query}
+                                value={this.state.value}
                                 onChange={(event) => this.updateQuery(event.target.value)}
                             />
                         </Debounce>
