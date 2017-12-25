@@ -26,31 +26,32 @@ class SearchBar extends Component {
 
 
     updateQuery = (query) => {
-        this.setState({query});
-        console.log(query);
-        //if user updates query, do a search with query and max returned results.
         if(query) {
+            //if user updates query, do a search with query and max returned results.
             BooksAPI.search(query, 20).then((books) => {
-                console.log(books);
-                //only change state if books are actually found
+
+                //if books are returned, merge duplicate books already in shelf into query
                 if(books.length > 0) {
 
-                    const booksInShelf = this.state.books;
+                    //remove potential duplicates returned
+                    const booksInShelf = new Set(this.state.books);
 
-                    //if queried book exists in shelf, replace queried book with shelf book
-                    for(let i = 0; i < books.length; i++) {
-                        let index = booksInShelf.indexOf(books[i]);
+                    //if books returned from query exists in shelf, set correct shelf property
+                    //QUESTION TO REVIEWER: Is there a more efficient way to do this rather than O = n^2?
+                    books.forEach((newBook) => {
+                        booksInShelf.forEach((existingBook) => {
+                            if(existingBook.id === newBook.id) {
+                                newBook.shelf = existingBook.shelf;
+                            }
+                        })
+                    });
+                    this.setState({books});
 
-                        if(index) {
-                            books[i] = booksInShelf[index];
-                        }
-                    }
-                    this.setState({books})
+                    //if empty query, clear array
+                } else {
+                    this.setState({books: []});
                 }
-            })
-        } else {
-            // If input string is empty, show no books
-            this.setState({books: []})
+            });
         }
     };
 
