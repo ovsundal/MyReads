@@ -1,22 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Book extends Component {
+function Book(props) {
 
-    constructor(props) {
-        super(props);
-        this.book = this.props.book;
-    }
-
-    render() {
         return(
-
-            <div className="book" key={this.book.id}>
+            <div className="book" key={props.book.id}>
                 <div className="book-top">
                     <div className="book-cover"
-                         style={{width: 128, height: 193, backgroundImage: `url(${this.book.imageLinks.smallThumbnail}`}}>
+                         style={{width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.smallThumbnail}`}}>
                         <div className="book-shelf-changer">
-                            <select value={this.book.shelf} onChange={(event) => {
-                                this.props.changeShelf(this.book, event.target.value);
+                            <select value={props.book.shelf} onChange={(event) => {
+                                props.changeShelf(props.book, event.target.value);
                             }}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="none">None</option>
@@ -27,11 +20,10 @@ class Book extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="book-title">{`${this.book.title}`}</div>
-                <div className="book-authors">{`${this.book.authors}`}</div>
+                <div className="book-title">{`${props.book.title}`}</div>
+                <div className="book-authors">{`${props.book.authors}`}</div>
             </div>
         )
-    }
 }
 
 export default Book;
