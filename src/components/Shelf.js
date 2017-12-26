@@ -8,8 +8,6 @@ class Shelf extends Component {
         super(props);
     }
 
-    // changeShelf = (book, shelf) => (BooksAPI.update(book, shelf));
-
     render() {
         return(
             <div className="bookshelf">
@@ -18,9 +16,9 @@ class Shelf extends Component {
                     <ol className="books-grid">
 
                         {this.props.books.map((item) =>
-                            // how would i uniquely identify each book with a "key" prop?
                             <li key={item.id}>
                                 <Book
+                                    changeShelf = {this.props.changeShelf}
                                     book = {item}
                                 />
                             </li>

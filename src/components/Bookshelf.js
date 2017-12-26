@@ -13,8 +13,6 @@ class Bookshelf extends Component {
             wantToRead: [],
             read: []
         };
-
-        this.reloadBooks = this.refreshBookList.bind(this);
     }
 
     //on initial load, add all books from API and filter them to their respective shelf
@@ -42,6 +40,12 @@ class Bookshelf extends Component {
             this.setState({read});
         });
     };
+    //pass this method to book component
+    changeShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf);
+        book.shelf = shelf;
+        this.refreshBookList();
+    };
 
     render() {
         return (
@@ -52,24 +56,24 @@ class Bookshelf extends Component {
                 <div className="list-books-content">
                     <div>
                         <Shelf
+                            changeShelf = {this.changeShelf}
                             books = {this.state.currentlyReading}
                             shelfName = "Currently Reading"
-                            reloadBooks = {this.reloadBooks}
                         />
                         <Shelf
+                            changeShelf = {this.changeShelf}
                             books = {this.state.wantToRead}
                             shelfName = "Want To Read"
-                            reloadBooks = {this.reloadBooks}
                         />
                         <Shelf
+                            changeShelf = {this.changeShelf}
                             books = {this.state.read}
                             shelfName = "Read"
-                            reloadBooks = {this.reloadBooks}
                         />
                     </div>
                 </div>
 
-                {/*QUESTION i can't get the button to appear? What am i doing wrong?*/}
+                {/*QUESTION FOR REVIEWER i can't get the button to appear? What am i doing wrong?*/}
                 <Link
                     to="/search"
                     className="open-search"

@@ -3,6 +3,7 @@ import * as BooksAPI from '../BooksAPI';
 import {Link} from 'react-router-dom';
 import { Debounce } from 'react-throttle';
 import Book from "./Book";
+import Bookshelf from "./Bookshelf";
 
 /**
  * Component for book searching input field
@@ -19,11 +20,6 @@ class SearchBar extends Component {
         BooksAPI.getAll().then((books) =>
             this.setState({ books }))
     }
-
-    // changeShelf = (book, shelf) => {
-    //     BooksAPI.update(book, shelf);
-    // };
-
 
     updateQuery = (query) => {
         if(query) {
