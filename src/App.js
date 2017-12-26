@@ -11,7 +11,7 @@ class BooksApp extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state= {
+        this.state = {
             currentlyReading: [],
             wantToRead: [],
             read: []
@@ -51,52 +51,51 @@ class BooksApp extends React.Component {
     };
 
 
-  render() {
-      this.refreshBookList();
-    return (
-      <div className="app">
-          {/*render searchbar component if route is /search*/}
-        <Route path="/search" render={() => (
-            <SearchBar
-                changeShelf = {this.changeShelf}
-            />
-        )}/>
-            {/*render shelf components if route is /*/}
-        <Route exact path="/" render={() => (
-            <div className="list-books">
-                <div className="list-books-title">
-                    <h1>MyReads</h1>
-                </div>
-                <div className="list-books-content">
-                    <div>
-                        <Shelf
-                            changeShelf = {this.changeShelf}
-                            books = {this.state.currentlyReading}
-                            shelfName = "Currently Reading"
-                        />
-                        <Shelf
-                            changeShelf = {this.changeShelf}
-                            books = {this.state.wantToRead}
-                            shelfName = "Want To Read"
-                        />
-                        <Shelf
-                            changeShelf = {this.changeShelf}
-                            books = {this.state.read}
-                            shelfName = "Read"
-                        />
-                    </div>
-                </div>
+    render() {
+        this.refreshBookList();
+        return (
+            <div className="app">
+                {/*render searchbar component if route is /search*/}
+                <Route path="/search" render={() => (
+                    <SearchBar
+                        changeShelf={this.changeShelf}
+                    />
+                )}/>
+                {/*render shelf components if route is /*/}
+                <Route exact path="/" render={() => (
+                    <div className="list-books">
+                        <div className="list-books-title">
+                            <h1>MyReads</h1>
+                        </div>
+                        <div className="list-books-content">
+                            <div>
+                                <Shelf
+                                    changeShelf={this.changeShelf}
+                                    books={this.state.currentlyReading}
+                                    shelfName="Currently Reading"
+                                />
+                                <Shelf
+                                    changeShelf={this.changeShelf}
+                                    books={this.state.wantToRead}
+                                    shelfName="Want To Read"
+                                />
+                                <Shelf
+                                    changeShelf={this.changeShelf}
+                                    books={this.state.read}
+                                    shelfName="Read"
+                                />
+                            </div>
+                        </div>
 
-                {/*QUESTION FOR REVIEWER i can't get the button to appear? What am i doing wrong?*/}
-                <Link
-                    to="/search"
-                    className="open-search"
-                >Find a book</Link>
+                        <Link
+                            to="/search"
+                            className="open-search"
+                        >Find a book</Link>
+                    </div>
+                )}/>
             </div>
-        )}/>
-      </div>
-    )
-  }
+        )
+    }
 }
 
 export default BooksApp

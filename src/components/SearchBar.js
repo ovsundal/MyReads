@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as BooksAPI from '../BooksAPI';
 import {Link} from 'react-router-dom';
-import { Debounce } from 'react-throttle';
+import {Debounce} from 'react-throttle';
 import Book from "./Book";
 
 /**
@@ -17,26 +17,25 @@ class SearchBar extends Component {
     //on initial load, add all books from API to state.books
     componentDidMount() {
         BooksAPI.getAll().then((books) =>
-            this.setState({ books }))
+            this.setState({books}))
     }
 
     updateQuery = (query) => {
-        if(query) {
+        if (query) {
             //if user updates query, do a search with query and max returned results.
             BooksAPI.search(query, 20).then((books) => {
 
                 //if books are returned, merge duplicate books already in shelf into query
-                if(books.length > 0) {
+                if (books.length > 0) {
 
                     //remove potential duplicates returned
                     const booksInShelf = new Set(this.state.books);
 
                     //if books returned from query exists in shelf, set correct shelf property
-                    //QUESTION TO REVIEWER: Is there a more efficient way to do this rather than O = n^2?
                     books.forEach((newBook) => {
                         booksInShelf.forEach((existingBook) => {
                             //if book exists in shelf, change current shelf
-                            if(existingBook.id === newBook.id) {
+                            if (existingBook.id === newBook.id) {
                                 newBook.shelf = existingBook.shelf;
                             }
 
@@ -56,7 +55,7 @@ class SearchBar extends Component {
         //get array from state
         const showingBooks = this.state.books;
 
-        return(
+        return (
 
             <div className="search-books">
                 <div className="search-books-bar">
@@ -79,12 +78,12 @@ class SearchBar extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {showingBooks.map((item) => (
-                        <li key={item.id}>
-                               <Book
-                                changeShelf = {this.props.changeShelf}
-                                book = {item}
-                            />
-                        </li>
+                            <li key={item.id}>
+                                <Book
+                                    changeShelf={this.props.changeShelf}
+                                    book={item}
+                                />
+                            </li>
                         ))}
                     </ol>
                 </div>
