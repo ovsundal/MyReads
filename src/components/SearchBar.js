@@ -3,7 +3,6 @@ import * as BooksAPI from '../BooksAPI';
 import {Link} from 'react-router-dom';
 import { Debounce } from 'react-throttle';
 import Book from "./Book";
-import Bookshelf from "./Bookshelf";
 
 /**
  * Component for book searching input field
@@ -36,9 +35,11 @@ class SearchBar extends Component {
                     //QUESTION TO REVIEWER: Is there a more efficient way to do this rather than O = n^2?
                     books.forEach((newBook) => {
                         booksInShelf.forEach((existingBook) => {
+                            //if book exists in shelf, change current shelf
                             if(existingBook.id === newBook.id) {
                                 newBook.shelf = existingBook.shelf;
                             }
+
                         })
                     });
                     this.setState({books});
@@ -79,7 +80,8 @@ class SearchBar extends Component {
                     <ol className="books-grid">
                         {showingBooks.map((item) => (
                         <li key={item.id}>
-                            <Book
+                               <Book
+                                changeShelf = {this.props.changeShelf}
                                 book = {item}
                             />
                         </li>
