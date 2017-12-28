@@ -9,7 +9,8 @@ provided at project start, all javascript/React code was written by author.
 ## Starting The App
 
 (For this app to work, node package manager must be installed)
-Fork or clone the repository on Github. Then, type "npm start" in the console.
+Fork or clone the repository on Github. Install all project dependencies with "npm install".
+Then, type "npm start" in the console.
 
 #### Back-End Server
 
