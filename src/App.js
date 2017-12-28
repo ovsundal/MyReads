@@ -86,11 +86,9 @@ class BooksApp extends React.Component {
                                 />
                             </div>
                         </div>
-
-                        <Link
-                            to="/search"
-                            className="open-search"
-                        >Find a book</Link>
+                        <div className="open-search">
+                        <Link to="/search">Find a book</Link>
+                        </div>
                     </div>
                 )}/>
             </div>
