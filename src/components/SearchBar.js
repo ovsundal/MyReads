@@ -27,12 +27,9 @@ class SearchBar extends Component {
                 //if books are returned, merge duplicate books already in shelf into query
                 if (books.length > 0) {
 
-                    //remove potential duplicates returned
-                    const booksInShelf = new Set(this.state.books);
-
                     //if books returned from query exists in shelf, set correct shelf property
                     books.forEach((newBook) => {
-                        booksInShelf.forEach((existingBook) => {
+                        this.props.books.forEach((existingBook) => {
                             //if book exists in shelf, change current shelf
                             if (existingBook.id === newBook.id) {
                                 newBook.shelf = existingBook.shelf;
