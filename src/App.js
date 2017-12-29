@@ -12,9 +12,7 @@ class BooksApp extends React.Component {
         super(props);
 
         this.state = {
-            currentlyReading: [],
-            wantToRead: [],
-            read: []
+            books: []
         };
     }
 
@@ -25,22 +23,7 @@ class BooksApp extends React.Component {
 
     refreshBookList = () => {
         BooksAPI.getAll().then((books) => {
-
-            const currentlyReading = books.filter((book) => {
-                return book.shelf === "currentlyReading";
-            });
-
-            const wantToRead = books.filter((book) => {
-                return book.shelf === "wantToRead";
-            });
-
-            const read = books.filter((book) => {
-                return book.shelf === "read";
-            });
-
-            this.setState({currentlyReading});
-            this.setState({wantToRead});
-            this.setState({read});
+            this.setState({books})
         });
     };
     //pass this method to book component
@@ -71,17 +54,23 @@ class BooksApp extends React.Component {
                             <div>
                                 <Shelf
                                     changeShelf={this.changeShelf}
-                                    books={this.state.currentlyReading}
+                                    books={this.state.books.filter((book) => {
+                                        return book.shelf === "currentlyReading";
+                                    })}
                                     shelfName="Currently Reading"
                                 />
                                 <Shelf
                                     changeShelf={this.changeShelf}
-                                    books={this.state.wantToRead}
+                                    books={this.state.books.filter((book) => {
+                                        return book.shelf === "wantToRead";
+                                    })}
                                     shelfName="Want To Read"
                                 />
                                 <Shelf
                                     changeShelf={this.changeShelf}
-                                    books={this.state.read}
+                                    books={this.state.books.filter((book) => {
+                                        return book.shelf === "read";
+                                    })}
                                     shelfName="Read"
                                 />
                             </div>
