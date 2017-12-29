@@ -16,8 +16,7 @@ class SearchBar extends Component {
 
     //on initial load, add all books from API to state.books
     componentDidMount() {
-        BooksAPI.getAll().then((books) =>
-            this.setState({books}))
+        this.setState({books: this.props.books});
     }
 
     updateQuery = (query) => {
@@ -54,7 +53,6 @@ class SearchBar extends Component {
     render() {
         //get array from state
         const showingBooks = this.state.books;
-
         return (
 
             <div className="search-books">
