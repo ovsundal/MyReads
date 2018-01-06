@@ -24,19 +24,19 @@ class SearchBar extends Component {
             //if user updates query, do a search with query and max returned results.
             BooksAPI.search(query, 20).then((books) => {
 
+
+
+
                 //if books are returned, merge duplicate books already in shelf into query
                 if (books.length > 0) {
 
-                    //if books returned from query exists in shelf, set correct shelf property
-                    books.forEach((newBook) => {
-                        this.props.books.forEach((existingBook) => {
-                            //if book exists in shelf, change current shelf
-                            if (existingBook.id === newBook.id) {
-                                newBook.shelf = existingBook.shelf;
-                            }
+                    //assign books existing in shelfs into hashtable
+                    let hashTable = {};
+                    this.state.books.forEach(book => hashTable[book.id] = book.shelf);
 
-                        })
-                    });
+                    //if queried books already exist in hashtable, update shelf status. If not, set shelf to none
+                    books.forEach((newBook) => newBook.shelf = hashTable[newBook.id] || 'None');
+
                     this.setState({books});
 
                     //if empty query, clear array
