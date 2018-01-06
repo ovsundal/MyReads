@@ -24,9 +24,6 @@ class SearchBar extends Component {
             //if user updates query, do a search with query and max returned results.
             BooksAPI.search(query, 20).then((books) => {
 
-
-
-
                 //if books are returned, merge duplicate books already in shelf into query
                 if (books.length > 0) {
 
@@ -75,6 +72,7 @@ class SearchBar extends Component {
                         {showingBooks.map((item) => (
                             <li key={item.id}>
                                 <Book
+                                    refreshBookList={this.props.refreshBookList}
                                     changeShelf={this.props.changeShelf}
                                     book={item}
                                 />

@@ -6,7 +6,8 @@ function Book(props) {
         <div className="book" key={props.book.id}>
             <div className="book-top">
                 <div className="book-cover"
-                     style={{width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.smallThumbnail}`}}>
+                     style={{width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.smallThumbnail ?
+                             props.book.imageLinks.smallThumbnail : ''}`}}>
                     <div className="book-shelf-changer">
                         <select value={props.book.shelf} onChange={(event) => {
                             props.changeShelf(props.book, event.target.value);
