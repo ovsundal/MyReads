@@ -35,7 +35,6 @@ class BooksApp extends React.Component {
 
 
     render() {
-        this.refreshBookList();
         return (
             <div className="app">
                 {/*render searchbar component if route is /search*/}
@@ -55,6 +54,7 @@ class BooksApp extends React.Component {
                         <div className="list-books-content">
                             <div>
                                 <Shelf
+                                    refreshBookList={this.refreshBookList}
                                     changeShelf={this.changeShelf}
                                     books={this.state.books.filter((book) => {
                                         return book.shelf === "currentlyReading";

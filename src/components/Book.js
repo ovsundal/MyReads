@@ -10,6 +10,7 @@ function Book(props) {
                     <div className="book-shelf-changer">
                         <select value={props.book.shelf} onChange={(event) => {
                             props.changeShelf(props.book, event.target.value);
+                            props.refreshBookList();
                         }}>
                             <option value="none" disabled>Move to...</option>
                             <option value="none">None</option>

@@ -11,6 +11,7 @@ function Shelf(props) {
                     {props.books.map((item) =>
                         <li key={item.id}>
                             <Book
+                                refreshBookList={props.refreshBookList}
                                 changeShelf={props.changeShelf}
                                 book={item}
                             />
